@@ -1,4 +1,4 @@
-# priv-sec-ai-from-scratch
+# Private &amp; Secure AI from Scratch
 Hi, here are my implementations of Private &amp; Secure AI concepts from scratch.
 
 ## Concepts
