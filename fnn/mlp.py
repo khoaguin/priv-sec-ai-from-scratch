@@ -61,6 +61,16 @@ class MLP:
         self.cache = dict()
 
 
+class activ_functions:
+    def __init__(self, function_name: str) -> None:
+        """
+        Args:
+            function_name (str): the name of the activation function, 
+        """
+        pass
+
+
+
 def mse_loss(y, y_hat):
     """
     Args:
