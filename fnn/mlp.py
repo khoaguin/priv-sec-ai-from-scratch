@@ -60,6 +60,7 @@ class MLP:
             self.grads[grad].zero_()
         self.cache = dict()
 
+
 def mse_loss(y, y_hat):
     """
     Args:
@@ -75,6 +76,7 @@ def mse_loss(y, y_hat):
 
 
     # return loss, dJdy_hat
+
 
 def bce_loss(y, y_hat):
     """

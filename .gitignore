@@ -1,0 +1,8 @@
+# Azure cloud files
+**/*.amlignore
+**/*.amltmp
+**/.ipynb_aml_checkpoints/
+# Local Files
+**/__pycache__
+.ipynb_checkpoints/
+**/.vscode/
