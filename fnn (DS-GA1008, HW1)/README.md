@@ -1,5 +1,5 @@
 # Fully Connected Neural Network
-This implementation is my solutions to the first homework of the course Deep Learning at NYU, 2021 from the legendary Yann Lecun and Alfredo Canziani. [Here](https://atcold.github.io/NYU-DLSP21/) is the link to the course. In this homework, we will implement a simple neural network with 2 linear layers (both forward and backward pass). 
+This implementation is my solutions to the first homework of the course Deep Learning at NYU, 2021 from the legendary Yann Lecun and Alfredo Canziani. [Here](https://atcold.github.io/NYU-DLSP21/) is the link to the course. In this homework, we will implement a simple neural network with 2 linear layers (both forward and backward pass). Please use this responsibly according to the honor code of the course, as we do not want to make the teachers implement a new homework every year.
 
 Of course, understanding the theory is very important before we even write any code. `theory.pdf` contains my answers for the theory part in `homework1.pdf`. I try to make things as clear as possible, however, there are parts that I still have doubts. It is great if you can walk through them and find out my mistakes. Please make an issue to notify me about any mistakes, I am more than happy to discuss and fix them.  
 
