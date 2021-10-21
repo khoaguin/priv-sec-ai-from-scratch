@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from mlp import MLP, bce_loss, mse_loss
 
 # manual network
-num_features = [2, 70, 5]
+num_features = [20, 50, 15]
 batch_size = 10
 net = MLP(
     linear_1_in_features=num_features[0],

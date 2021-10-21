@@ -194,7 +194,7 @@ def bce_loss(y, y_hat):
     """
     # calculate BCE loss
     epsilon = 1e-20  # to avoid inf/-inf
-    y_hat = torch.clamp(y_hat, min=epsilon, max= 1-epsilon)
+    y_hat = torch.clamp(y_hat, min=epsilon, max=1-epsilon)
     total_features = len(y.view(-1))
     term0 = y * torch.log(y_hat+epsilon)
     term1= (1-y) * torch.log(1-y_hat+epsilon)
