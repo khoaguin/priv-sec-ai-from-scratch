@@ -133,13 +133,15 @@ class ActivFunc:
         """
         if self.func == "sigmoid":
             y = 1 / (1 + torch.exp(-x))
-            
+            dydx = y*(1-y)
+
         elif self.func == "relu":
             y = deepcopy(x)
             y[y<0] = 0
             dydx = deepcopy(x)
             dydx[dydx<0] = 0
             dydx[dydx>0] = 1
+        
         else:  # "identity"
             y = x
             dydx = torch.ones(x.shape)
@@ -157,20 +159,22 @@ def mse_loss(y, y_hat):
     the loss with respect to the predicted outputs y_hat
 
     Args:
-        y: the label tensor (batch_size, linear_2_out_features)
-        y_hat: the prediction tensor (batch_size, linear_2_out_features)
+        y: the label tensor, shape: (batch_size, linear_2_out_features)
+        y_hat: the prediction tensor, shape: (batch_size, linear_2_out_features)
 
     Return:
         J: scalar of loss
         dJdy_hat: The gradient tensor of shape (batch_size, linear_2_out_features)
     """
-    # calculate MSE loss
+    # calculate the MSE loss
     square_diff = torch.square(y_hat - y)
     total_features = len(y.view(-1))
     loss = 1/total_features * square_diff.sum()
 
     # calculate the derivative of the loss w.r.t y_hat
     dJdy_hat = 1/total_features * 2*(y_hat-y)
+
+    assert dJdy_hat.shape == y_hat.shape, "The gradient needs to have the same shape with y_hat"
 
     return loss, dJdy_hat
 
@@ -181,14 +185,25 @@ def bce_loss(y, y_hat):
     the loss with respect to the predicted outputs y_hat
 
     Args:
-        y_hat: the prediction tensor
-        y: the label tensor
+        y_hat: the prediction tensor, shape: (batch_size, linear_2_out_features)
+        y: the label tensor, shape: (batch_size, linear_2_out_features)
         
     Return:
         loss: scalar of loss
         dJdy_hat: The gradient tensor of shape (batch_size, linear_2_out_features)
     """
+    # calculate BCE loss
+    epsilon = 1e-20  # to avoid inf/-inf
+    y_hat = torch.clamp(y_hat, min=epsilon, max= 1-epsilon)
+    total_features = len(y.view(-1))
+    term0 = y * torch.log(y_hat+epsilon)
+    term1= (1-y) * torch.log(1-y_hat+epsilon)
+    loss = -1/total_features *  (term0 + term1).sum()
+    # calculate the derivative of the loss w.r.t y_hat
+    dJdy_hat = 1/total_features * (y_hat-y)/(y_hat*(1-y_hat)+epsilon)
 
-    # return loss, dJdy_hat
+    assert dJdy_hat.shape == y_hat.shape, "The gradient needs to have the same shape with y_hat"
+
+    return loss, dJdy_hat
     
 

@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from mlp import MLP, mse_loss, bce_loss
 
-num_features = [2, 20, 5]
+num_features = [20, 100, 50]
 net = MLP(
     linear_1_in_features=num_features[0],
     linear_1_out_features=num_features[1],
@@ -26,9 +26,9 @@ net.backward(dJdy_hat)
 # compare the result with autograd
 net_autograd = nn.Sequential(
     OrderedDict([
-        ('linear1', nn.Linear(2, 20)),
+        ('linear1', nn.Linear(num_features[0], num_features[1])),
         ('relu', nn.ReLU()),
-        ('linear2', nn.Linear(20, 5)),
+        ('linear2', nn.Linear(num_features[1], num_features[2])),
     ])
 )
 net_autograd.linear1.weight.data = net.parameters['W1']

@@ -5,16 +5,18 @@ import torch.nn as nn
 import torch.nn.functional as F
 from mlp import MLP, mse_loss, bce_loss
 
+num_features = [30, 150, 40]
+batch_size = 10
 net = MLP(
-    linear_1_in_features=2,
-    linear_1_out_features=20,
+    linear_1_in_features=num_features[0],
+    linear_1_out_features=num_features[1],
     f_function='sigmoid',
-    linear_2_in_features=20,
-    linear_2_out_features=5,
+    linear_2_in_features=num_features[1],
+    linear_2_out_features=num_features[2],
     g_function='sigmoid'
 )
-x = torch.randn(10, 2)
-y = (torch.randn(10, 5) < 0.5) * 1.0
+x = torch.randn(batch_size, num_features[0])
+y = (torch.randn(batch_size, num_features[2]) < 0.5) * 1.0
 
 net.clear_grad_and_cache()
 y_hat = net.forward(x)
@@ -25,9 +27,9 @@ net.backward(dJdy_hat)
 # compare the result with autograd
 net_autograd = nn.Sequential(
     OrderedDict([
-        ('linear1', nn.Linear(2, 20)),
+        ('linear1', nn.Linear(num_features[0], num_features[1])),
         ('sigmoid1', nn.Sigmoid()),
-        ('linear2', nn.Linear(20, 5)),
+        ('linear2', nn.Linear(num_features[1], num_features[2])),
         ('sigmoid2', nn.Sigmoid()),
     ])
 )
@@ -38,7 +40,8 @@ net_autograd.linear2.bias.data = net.parameters['b2']
 
 y_hat_autograd = net_autograd(x)
 
-J_autograd = torch.nn.BCELoss()(y_hat_autograd, y)
+bce = torch.nn.BCELoss()
+J_autograd = bce(y_hat_autograd, y)
 
 net_autograd.zero_grad()
 J_autograd.backward()
