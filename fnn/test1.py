@@ -5,16 +5,17 @@ import torch.nn as nn
 import torch.nn.functional as F
 from mlp import MLP, mse_loss, bce_loss
 
+num_features = [2, 20, 5]
 net = MLP(
-    linear_1_in_features=2,
-    linear_1_out_features=20,
+    linear_1_in_features=num_features[0],
+    linear_1_out_features=num_features[1],
     f_function='relu',
-    linear_2_in_features=20,
-    linear_2_out_features=5,
+    linear_2_in_features=num_features[1],
+    linear_2_out_features=num_features[2],
     g_function='identity'
 )
-x = torch.randn(10, 2)
-y = torch.randn(10, 5)
+x = torch.randn(10, num_features[0])
+y = torch.randn(10, num_features[2])
 
 net.clear_grad_and_cache()
 y_hat = net.forward(x)
