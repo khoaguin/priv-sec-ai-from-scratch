@@ -223,5 +223,3 @@ def bce_loss(y, y_hat):
     assert dJdy_hat.shape == y_hat.shape, "The gradient needs to have the same shape with y_hat"
 
     return loss, dJdy_hat
-    
-
