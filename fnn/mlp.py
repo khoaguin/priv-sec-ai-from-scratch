@@ -13,7 +13,8 @@ class MLP:
         f_function,
         linear_2_in_features,
         linear_2_out_features,
-        g_function
+        g_function,
+        lr: int = 0.1
     ):
         """
         Args:
@@ -103,10 +104,27 @@ class MLP:
         self.grads["dJdb1"] = dJdz1.sum(0)
         self.grads["dJdW1"] = torch.matmul(dJdz1.T, self.cache["dz1dW1"])
 
+        assert self.grads["dJdb2"].shape == self.parameters["b2"].shape, \
+            "dJdb2 needs to have the same shape as b2"
+        assert self.grads["dJdW2"].shape == self.parameters["W2"].shape, \
+            "dJdW2 needs to have the same shape as W2"
+        assert self.grads["dJdb1"].shape == self.parameters["b1"].shape, \
+            "dJdb1 needs to have the same shape as b1"
+        assert self.grads["dJdW1"].shape == self.parameters["W1"].shape, \
+            "dJdW1 needs to have the same shape as W1"
+
     def clear_grad_and_cache(self):
         for grad in self.grads:
             self.grads[grad].zero_()
         self.cache = dict()
+    
+    def update_params(self) -> None:
+        """Update the parameters in self.parameters based on self.grads
+        """
+        self.parameters["W1"] = self.parameters["W1"] - self.grads["dJdW1"]
+        self.parameters["b1"] = self.parameters["b1"] - self.grads["dJdb1"]
+        self.parameters["W2"] = self.parameters["W2"] - self.grads["dJdW2"]
+        self.parameters["b2"] = self.parameters["b2"] - self.grads["dJdb2"]
 
 
 class ActivFunc:
