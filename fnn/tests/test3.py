@@ -3,19 +3,23 @@ from collections import OrderedDict
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+import pathlib
+import sys
+_parentdir = pathlib.Path(__file__).parent.parent.resolve()
+sys.path.insert(0, str(_parentdir))
 from mlp import MLP, mse_loss, bce_loss
 
-num_features = [20, 100, 50]
 net = MLP(
-    linear_1_in_features=num_features[0],
-    linear_1_out_features=num_features[1],
+    linear_1_in_features=2,
+    linear_1_out_features=20,
     f_function='relu',
-    linear_2_in_features=num_features[1],
-    linear_2_out_features=num_features[2],
-    g_function='identity'
+    linear_2_in_features=20,
+    linear_2_out_features=22,
+    g_function='relu'
 )
-x = torch.randn(10, num_features[0])
-y = torch.randn(10, num_features[2])
+x = torch.randn(10, 2)
+y = torch.randn(10, 22)
 
 net.clear_grad_and_cache()
 y_hat = net.forward(x)
@@ -26,9 +30,10 @@ net.backward(dJdy_hat)
 # compare the result with autograd
 net_autograd = nn.Sequential(
     OrderedDict([
-        ('linear1', nn.Linear(num_features[0], num_features[1])),
-        ('relu', nn.ReLU()),
-        ('linear2', nn.Linear(num_features[1], num_features[2])),
+        ('linear1', nn.Linear(2, 20)),
+        ('relu1', nn.ReLU()),
+        ('linear2', nn.Linear(20, 22)),
+        ('relu2', nn.ReLU()),
     ])
 )
 net_autograd.linear1.weight.data = net.parameters['W1']

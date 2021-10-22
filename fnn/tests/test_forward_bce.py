@@ -1,13 +1,19 @@
-# Test y_hat, mse loss, and the gradient of mse loss w.r.t y_hat
+# Test y_hat, BCE loss, and the gradient of the loss w.r.t y_hat
+# be careful with 0 divisions when calculating BCE
 from collections import OrderedDict
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from mlp import MLP, mse_loss
+
+import pathlib
+import sys
+_parentdir = pathlib.Path(__file__).parent.parent.resolve()
+sys.path.insert(0, str(_parentdir))
+from mlp import MLP, mse_loss, bce_loss
 
 # manual network
-num_features = [100, 200, 10]
+num_features = [10, 20, 5]
 batch_size = 10
 net = MLP(
     linear_1_in_features=num_features[0],
@@ -18,11 +24,11 @@ net = MLP(
     g_function='sigmoid'
 )
 x = torch.randn(batch_size, num_features[0])
-y = torch.randn(batch_size, num_features[2])
+y = (torch.randn(batch_size, num_features[2]) < 0.5) * 1.0
 
 net.clear_grad_and_cache()
-y_hat = net.forward(x.detach())
-J, dJdy_hat = mse_loss(y.detach(), y_hat)
+y_hat = net.forward(x)
+J, dJdy_hat = bce_loss(y, y_hat)
 
 # pytorch network
 net_autograd = nn.Sequential(
@@ -41,8 +47,8 @@ net_autograd.linear2.bias.data = net.parameters['b2']
 
 y_hat_torch = net_autograd(x)
 y_hat_torch.retain_grad()
-mse_torch = nn.MSELoss()
-J_torch = mse_torch(y_hat_torch, y)
+bce_torch = nn.BCELoss()
+J_torch = bce_torch(y_hat_torch, y)
 J_torch.backward()
 
 # comparing (these all need to print True)

@@ -3,9 +3,14 @@ from collections import OrderedDict
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+import pathlib
+import sys
+_parentdir = pathlib.Path(__file__).parent.parent.resolve()
+sys.path.insert(0, str(_parentdir))
 from mlp import MLP, mse_loss, bce_loss
 
-num_features = [30, 150, 40]
+num_features = [10, 50, 5]
 batch_size = 10
 net = MLP(
     linear_1_in_features=num_features[0],
