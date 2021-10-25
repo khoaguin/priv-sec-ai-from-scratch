@@ -9,3 +9,10 @@ In addition to the default tests offered by the course homework, I also added a 
 - `test_forward_bce.py`: compares the values of `y_hat`, `bce_loss`, and the derivatives of `bce_loss` with respect to `y_hat` of the forward pass of the manual neural net in `mlp.py` to the outputs of the same network using `torch`. There is one problem when using `sigmoid` and `bce_loss`: when you increase the number of features in the linear layers, the results may become wrong as there are divisions by very small numbers. This is something that I need to investigate deeper.
 - `test4.py`: test the derivatives of the mse loss function w.r.t the weights and biases for a neural network with one ReLU and one Sigmoid activation functions.
 - `test5.py`: similar to `test4.py`, but for bce loss function.
+
+## TODO
+- [] Training Using The Manual Network and Compare with PyTorch Implementation
+- [] Updating Parameters with Regularizations
+- [] Softmax Function (forward + backward)
+- [] Categorical Cross Entropy Loss (forward + backward)
+
