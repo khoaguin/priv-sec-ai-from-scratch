@@ -3,7 +3,7 @@ Hi, here are my implementations of Private &amp; Secure AI concepts from scratch
 
 ## Concepts
 - [x] Two-layer Fully-Connected Neural Network
-- [ ] Fully-Connected Neural Network (Modular Fashion)
+- [ ] Fully-Connected Neural Network (Modular Fashion) - DOING
 - [ ] Convolutional Neural Network
 - [ ] Split Learning
 - [ ] Federated Learning
