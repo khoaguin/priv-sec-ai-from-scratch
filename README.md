@@ -2,7 +2,8 @@
 Hi, here are my implementations of Private &amp; Secure AI concepts from scratch. The goal is to exercise these fundamental concepts using only Numpy and Python's standard libraries. I am also learning Rust, so there will also be implementations in Rust in the future.
 
 ## Concepts
-- [ ] Fully-connected Neural Network (DOING)
+- [x] Two-layer Fully-Connected Neural Network
+- [ ] Fully-Connected Neural Network (Modular Fashion)
 - [ ] Convolutional Neural Network
 - [ ] Split Learning
 - [ ] Federated Learning
