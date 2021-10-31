@@ -10,9 +10,3 @@ In addition to the default tests offered by the course homework, I also added a 
 - `test4.py`: test the derivatives of the mse loss function w.r.t the weights and biases for a neural network with one ReLU and one Sigmoid activation functions.
 - `test5.py`: similar to `test4.py`, but for bce loss function.
 
-## TODO
-- [] Training Using The Manual Network and Compare with PyTorch Implementation
-- [] Updating Parameters with Regularizations
-- [] Softmax Function (forward + backward)
-- [] Categorical Cross Entropy Loss (forward + backward)
-

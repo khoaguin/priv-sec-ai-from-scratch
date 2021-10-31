@@ -44,6 +44,8 @@ class MLP:
         # put all the cache value you need in self.cache
         self.cache = dict()
 
+        self.lr = lr
+
     def linear(self, x, W, b) -> Tuple[Tensor, Tensor, Tensor]:
         """The linear layer that produces the affine transformation
             y = xW' + b
@@ -121,10 +123,10 @@ class MLP:
     def update_params(self) -> None:
         """Update the parameters in self.parameters based on self.grads
         """
-        self.parameters["W1"] = self.parameters["W1"] - self.grads["dJdW1"]
-        self.parameters["b1"] = self.parameters["b1"] - self.grads["dJdb1"]
-        self.parameters["W2"] = self.parameters["W2"] - self.grads["dJdW2"]
-        self.parameters["b2"] = self.parameters["b2"] - self.grads["dJdb2"]
+        self.parameters["W1"] = self.parameters["W1"] - self.lr*self.grads["dJdW1"]
+        self.parameters["b1"] = self.parameters["b1"] - self.lr*self.grads["dJdb1"]
+        self.parameters["W2"] = self.parameters["W2"] - self.lr*self.grads["dJdW2"]
+        self.parameters["b2"] = self.parameters["b2"] - self.lr*self.grads["dJdb2"]
 
 
 class ActivFunc:
