@@ -5,10 +5,11 @@ Hi, here are my implementations of Private &amp; Secure AI concepts from scratch
 - [x] Two-layer Fully-Connected Neural Network
 - [ ] Fully-Connected Neural Network (Modular Fashion) - DOING
 - [ ] Convolutional Neural Network
+- [ ] Recurrent Neural Network
 - [ ] Split Learning
 - [ ] Federated Learning
 - [ ] Differential Privacy
 - [ ] Differentially Private Stochastic Gradient Descent
-- [ ] Homomorphic Encryption
+- [ ] Paillier Additive Homomorphic Cryptosystem (in Rust)
 - [ ] Blockchain
 
