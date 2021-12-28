@@ -10,6 +10,6 @@ Hi, here are my implementations of Private &amp; Secure AI concepts from scratch
 - [ ] Federated Learning
 - [ ] Differential Privacy
 - [ ] Differentially Private Stochastic Gradient Descent
-- [ ] Paillier Additive Homomorphic Cryptosystem and Encrypted Linear Model Evaluation using Paillier (in Python & Rust)
+- [ ] Paillier Additive Homomorphic Cryptosystem
 - [ ] Blockchain
 
