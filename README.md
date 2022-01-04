@@ -12,4 +12,5 @@ Hi, here are my implementations of Private &amp; Secure AI concepts from scratch
 - [ ] Differentially Private Stochastic Gradient Descent
 - [ ] Paillier Additive Homomorphic Cryptosystem
 - [ ] Blockchain
+- [ ] Secure Multiparty Computation
 
