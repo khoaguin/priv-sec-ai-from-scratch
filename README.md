@@ -3,7 +3,6 @@ Implementations of fundamental concepts in Private and Secure AI.
 
 ## Concepts
 - [x] Two-layer Fully-Connected Neural Network
-- [ ] Fully-Connected Neural Network (Modular Fashion) - DOING
 - [ ] Convolutional Neural Network
 - [ ] Recurrent Neural Network
 - [ ] Split Learning
