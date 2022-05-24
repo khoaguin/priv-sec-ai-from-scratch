@@ -2,7 +2,7 @@
 Implementations of fundamental concepts in Private and Secure AI.
 
 ## Concepts
-- [x] Two-layer Fully-Connected Neural Network
+- [x] Two-layer Fully-Connected Neural Network (Python)
 - [ ] Convolutional Neural Network
 - [ ] Recurrent Neural Network
 - [ ] Split Learning
@@ -12,4 +12,5 @@ Implementations of fundamental concepts in Private and Secure AI.
 - [ ] Paillier Additive Homomorphic Cryptosystem
 - [ ] Blockchain
 - [ ] Secure Multiparty Computation
+- [ ] TFHE: Fast Fully Homomorphic Encryption over the Torus
 
